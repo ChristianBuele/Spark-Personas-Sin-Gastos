@@ -24,7 +24,7 @@ def filter(line):
     if data is None:
         return []
     person, payment_method, amount = data
-    if payment_method.lower() != "tarjeta de crédito":
+    if payment_method.lower() != "tarjeta de crédito" or payment_method.lower() != "Bizum":
         return [(person, amount)]
     return [(person, 0.0)]
 
