@@ -12,16 +12,25 @@ if __name__ == "__main__":
 
     spark = SparkSession.builder.appName("CategoriaDeVideosMasVista").getOrCreate()
 
-    # Lee el CSV
-    df = spark.read.csv(input_folder, header=True, inferSchema=True)
+    # Nombres de columnas en orden (porque el archivo no tiene encabezado)
+    columnas = [
+        "video_id", "uploader", "age", "category", "length",
+        "views", "rate", "ratings", "comments", "related_ids"
+    ]
 
-    # Agrupa por categoría y suma las vistas
+    # Leer CSV sin encabezado
+    df = spark.read.csv(input_folder, header=False, inferSchema=True)
+
+    # Asignar nombres de columnas
+    df = df.toDF(*columnas)
+
+    # Agrupar por categoría y sumar las vistas
     categoria_vistas = df.groupBy("category").agg(spark_sum("views").alias("total_views"))
 
-    # Ordena y toma la más vista
+    # Ordenar y tomar la categoría con más vistas
     categoria_mas_vista = categoria_vistas.orderBy(col("total_views").desc()).limit(1)
 
-    # Guarda el resultado
+    # Guardar resultado
     categoria_mas_vista.coalesce(1).write.mode("overwrite").option("header", "true").csv(output_folder)
 
     spark.stop()
