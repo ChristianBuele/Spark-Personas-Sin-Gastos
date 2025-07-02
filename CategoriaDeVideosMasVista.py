@@ -19,7 +19,7 @@ if __name__ == "__main__":
     ]
 
     # Leer CSV sin encabezado
-    df = spark.read.csv(f"{input_folder}/*.txt", header=False, inferSchema=True, sep="\t")
+    df = spark.read.csv(input_folder, header=False, inferSchema=True, sep="\t")
 
     # Asignar nombres de columnas
     df = df.toDF(*columnas)
