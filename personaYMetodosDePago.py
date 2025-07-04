@@ -21,13 +21,17 @@ df_tdc = df.filter(lower(trim(col("metodo_pago"))) == "tarjeta de crédito")
 # a) Compras con TDC y > 1500 euros
 mayor_1500 = df_tdc.filter(col("dinero_gastado") > 1500)
 res_mayor = mayor_1500.groupBy("persona").agg(count("*").alias("compras_mayor_1500"))
-
+print("Compras con TDC y > 1500 euros:")
+res_mayor.show()
 # Guardar resultado en HDFS
 res_mayor.write.mode("overwrite").csv(hdfs_path + "/comprasConTDCMayorDe1500")
 
 # b) Compras con TDC y <= 1500 euros
 menor_igual_1500 = df_tdc.filter(col("dinero_gastado") <= 1500)
 res_menor = menor_igual_1500.groupBy("persona").agg(count("*").alias("compras_menor_igual_1500"))
+print("Compras con TDC y <= 1500 euros:")
+res_menor.show()
+
 
 # Guardar resultado en HDFS
 res_menor.write.mode("overwrite").csv(hdfs_path + "/output/comprasConTDCMenoroIgualDe1500")
