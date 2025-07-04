@@ -1,4 +1,5 @@
 from pyspark import SparkContext
+PATH_HDFS="hdfs://localhost:9000/ejercicio1/"
 
 def splitData(line:str):
     """
@@ -35,7 +36,7 @@ def main():
     sc = SparkContext("local", "Persona Gastos Sin Tarjeta de Credito")
     
     # Read the input file
-    rdd = sc.textFile("hdfs://localhost:9000/user/data/data/casoDePrueba1.txt")
+    rdd = sc.textFile(PATH_HDFS+"data/casoDePrueba1.txt")
     
    # Filtrado y mapeo eficiente
     gastos = (
@@ -44,7 +45,7 @@ def main():
            .map(lambda x: f"{x[0]};{int(x[1])}")  # convierte a string con formato deseado
     )
 
-    gastos.saveAsTextFile("hdfs://localhost:9000/user/data/salida/gastos")  # guarda la salida en HDFS o local
+    gastos.saveAsTextFile(PATH_HDFS+"output/personas")  # guarda la salida en HDFS o local
     sc.stop()
    
 if __name__ == "__main__":
