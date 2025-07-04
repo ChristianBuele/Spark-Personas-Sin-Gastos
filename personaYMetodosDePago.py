@@ -7,10 +7,9 @@ hdfs_path = "hdfs://localhost:9000/ejercicio3"
 spark = SparkSession.builder.appName("PersonaYMetodosDePago").getOrCreate()
 
 # Leer los datos (sin cabecera, usando el delimitador correcto)
-df = spark.read.option("delimiter", ";").csv(hdfs_path + "/data/casoDePrueba3.txt")
-
-# Asignar nombres a las columnas
+df = spark.read.option("delimiter", ";").option("header", "false").csv(hdfs_path + "/data/casoDePrueba3.txt")
 df = df.toDF("persona", "metodo_pago", "dinero_gastado")
+df.show()
 
 # Convertir dinero_gastado a float
 df = df.withColumn("dinero_gastado", col("dinero_gastado").cast("float"))
