@@ -1,5 +1,6 @@
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, count
+from pyspark.sql.functions import lower, trim
 
 hdfs_path = "hdfs://localhost:9000/ejercicio3"
 
