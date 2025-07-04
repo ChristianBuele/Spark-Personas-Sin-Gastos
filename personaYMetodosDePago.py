@@ -30,6 +30,6 @@ menor_igual_1500 = df_tdc.filter(col("dinero_gastado") <= 1500)
 res_menor = menor_igual_1500.groupBy("persona").agg(count("*").alias("compras_menor_igual_1500"))
 
 # Guardar resultado en HDFS
-res_menor.write.mode("overwrite").csv(hdfs_path + "/comprasConTDCMenoroIgualDe1500")
+res_menor.write.mode("overwrite").csv(hdfs_path + "/output/comprasConTDCMenoroIgualDe1500")
 
 spark.stop()
