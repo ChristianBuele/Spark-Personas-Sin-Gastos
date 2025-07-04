@@ -7,7 +7,7 @@ hdfs_path = "hdfs://localhost:9000/ejercicio3"
 spark = SparkSession.builder.appName("PersonaYMetodosDePago").getOrCreate()
 
 # Leer los datos (sin cabecera, usando el delimitador correcto)
-df = spark.read.option("delimiter", ";").csv(hdfs_path + "/data/casoPrueba3.txt")
+df = spark.read.option("delimiter", ";").csv(hdfs_path + "/data/casoDePrueba3.txt")
 
 # Asignar nombres a las columnas
 df = df.toDF("persona", "metodo_pago", "dinero_gastado")
