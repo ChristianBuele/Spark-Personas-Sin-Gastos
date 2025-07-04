@@ -35,7 +35,7 @@ def main():
     sc = SparkContext("local", "Persona Gastos Sin Tarjeta de Credito")
     
     # Read the input file
-    rdd = sc.textFile("casoDePrueba1.txt")
+    rdd = sc.textFile("hdfs://localhost:9000/user/data/data/casoDePrueba1.txt")
     
    # Filtrado y mapeo eficiente
     gastos = (
@@ -44,7 +44,7 @@ def main():
            .map(lambda x: f"{x[0]};{int(x[1])}")  # convierte a string con formato deseado
     )
 
-    gastos.saveAsTextFile("ruta/a/salida.txt")  # guarda la salida en HDFS o local
+    gastos.saveAsTextFile("hdfs://localhost:9000/user/data/salida/gastos")  # guarda la salida en HDFS o local
     sc.stop()
    
 if __name__ == "__main__":
