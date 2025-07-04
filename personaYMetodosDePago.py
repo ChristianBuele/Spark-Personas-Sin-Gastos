@@ -15,7 +15,7 @@ df.show()
 df = df.withColumn("dinero_gastado", col("dinero_gastado").cast("float"))
 
 # Filtrar solo compras con tarjeta de crédito
-df_tdc = df.filter(lower(trim(col("metodo_pago"))) == "tarjeta crédito")
+df_tdc = df.filter(lower(trim(col("metodo_pago"))) == "tarjeta de crédito")
 
 # a) Compras con TDC y > 1500 euros
 mayor_1500 = df_tdc.filter(col("dinero_gastado") > 1500)
