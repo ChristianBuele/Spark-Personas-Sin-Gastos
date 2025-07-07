@@ -30,7 +30,7 @@ def main():
     res_menor.write.mode("overwrite").csv(hdfs_path + "/output/comprasConTDCMenoroIgualDe1500")
     
     res_mayor = mayores_1500(df_tdc)
-    res_mayor.write.mode("overwrite").csv(hdfs_path + "/comprasConTDCMayorDe1500")
+    res_mayor.write.mode("overwrite").csv(hdfs_path + "/output/comprasConTDCMayorDe1500")
     
     spark.stop()
 
